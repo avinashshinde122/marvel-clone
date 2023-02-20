@@ -8,8 +8,7 @@ type HeaderProps = {
 const Header = ({ onSetSearchText }: HeaderProps) => {
   const searchHandler = (e: any) => {
     e.preventDefault();
-    const text = e.target["searchField"].value;
-    onSetSearchText(text);
+    onSetSearchText(e.target.value);
   };
   return (
     <Grid
@@ -20,15 +19,18 @@ const Header = ({ onSetSearchText }: HeaderProps) => {
         <Logo />
       </Grid>
       <Grid item sx={{ width: "500px", display: "flex", alignItems: "center" }}>
-        <form onSubmit={searchHandler}>
-          <TextField
-            size="small"
-            fullWidth
-            label="search for comics... "
-            name="searchField"
-            color="secondary"
-          />
-        </form>
+        <TextField
+          size="small"
+          fullWidth
+          label="search for comics... "
+          color="secondary"
+          onBlur={(e) => {
+            searchHandler(e);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") searchHandler(e);
+          }}
+        />
       </Grid>
     </Grid>
   );
