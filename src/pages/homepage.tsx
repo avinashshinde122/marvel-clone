@@ -6,11 +6,15 @@ import FilterPanel from "../components/filterPanel";
 
 const Homepage = () => {
   const [searchText, setSearchText] = useState("");
+  const [charactersFilter, setCharactersFilter] = useState<number[]>([]);
   return (
     <Grid container direction="column">
       <Header onSetSearchText={setSearchText} />
-      <FilterPanel />
-      <Comics searchText={searchText} />
+      <FilterPanel
+        onSetCharactersFilter={setCharactersFilter}
+        selectedCharacters={charactersFilter}
+      />
+      <Comics searchText={searchText} selectedCharacters={charactersFilter} />
     </Grid>
   );
 };

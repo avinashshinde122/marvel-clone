@@ -8,15 +8,15 @@ import ComicCard from "./comicCard";
 
 type ComicsProps = {
   searchText: string;
+  selectedCharacters: number[];
 };
-const Comics = ({ searchText }: ComicsProps) => {
+const Comics = ({ searchText, selectedCharacters }: ComicsProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const { isLoading, data } = useQuery(
-    ["comics", currentPage, searchText],
-    () => getComics(currentPage, searchText)
+    ["comics", currentPage, searchText, selectedCharacters],
+    () => getComics(currentPage, searchText, selectedCharacters)
   );
-  const totalPages = Math.floor(data?.data?.total / 20) || 0;
-  console.log({ isLoading, data });
+  const totalPages = Math.ceil(data?.data?.total / 20) || 0;
   const handlePageChange = (event: any, page: number) => {
     event.preventDefault();
     setCurrentPage(page);

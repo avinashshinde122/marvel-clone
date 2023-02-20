@@ -1,11 +1,18 @@
 import { API_KEY, BASE_URL, COMICS, HASH, TS } from "./constants";
 
-export const getComics = async (page: number, searchText: string) => {
+export const getComics = async (
+  page: number,
+  searchText: string,
+  charactersFilter: number[]
+) => {
   let url = `${
     BASE_URL + COMICS
-  }?ts=${TS}&apikey=${API_KEY}&hash=${HASH}&offset=${page * 20}`;
+  }?ts=${TS}&apikey=${API_KEY}&hash=${HASH}&offset=${(page - 1) * 20}`;
   if (searchText) {
     url += `&titleStartsWith=${searchText}`;
+  }
+  if (charactersFilter?.length > 0) {
+    url += `&characters=${charactersFilter.join(",")}`;
   }
   const result = await fetch(url);
   return await result.json();

@@ -7,3 +7,8 @@ export interface IComics {
   title: string;
   thumbnail: IThumbnail;
 }
+export interface ICharacters {
+  id: number;
+  name: string;
+  thumbnail: IThumbnail;
+}
