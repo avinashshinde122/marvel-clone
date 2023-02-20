@@ -23,11 +23,11 @@ const useTheme = (mode: string) => {
               paper: "#ffffff",
             },
 
-            // text: {
-            //   primary: "#FFFFFF",
-            //   secondary: "#FFFFFF",
-            //   disabled: "#FFFFFF",
-            // },
+            text: {
+              primary: "#FFFFFF",
+              secondary: "#FFFFFF",
+              disabled: "#FFFFFF",
+            },
 
             // Used by `getContrastText()` to maximize the contrast between
             // the background and the text.
@@ -41,6 +41,11 @@ const useTheme = (mode: string) => {
             primary: {
               main: "#423e3e",
               dark: "",
+            },
+            secondary: {
+              light: "#469dcd",
+              main: "#3f8ab3",
+              dark: "#2f607b",
             },
             divider: blueGrey[700],
             background: {

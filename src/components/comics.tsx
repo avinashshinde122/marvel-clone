@@ -1,11 +1,53 @@
+import Grid from "@mui/material/Grid";
+import Pagination from "@mui/material/Pagination";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { getComics } from "../api/comics";
+import { IComics } from "../types";
+import ComicCard from "./comicCard";
 
-const Comics = () => {
-  const { isLoading, data } = useQuery("comics", getComics);
+type ComicsProps = {
+  searchText: string;
+};
+const Comics = ({ searchText }: ComicsProps) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const { isLoading, data } = useQuery(
+    ["comics", currentPage, searchText],
+    () => getComics(currentPage, searchText)
+  );
+  const totalPages = Math.floor(data?.data?.total / 20) || 0;
   console.log({ isLoading, data });
-
-  return <div>Comics</div>;
+  const handlePageChange = (event: any, page: number) => {
+    event.preventDefault();
+    setCurrentPage(page);
+  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  return (
+    <>
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+        md={10}
+        sx={{ margin: "auto" }}
+      >
+        {data?.data?.results.map((comic: IComics) => (
+          <ComicCard comic={comic} key={comic.id} />
+        ))}
+        <Pagination
+          count={totalPages}
+          variant="outlined"
+          shape="rounded"
+          color="secondary"
+          page={currentPage}
+          onChange={handlePageChange}
+          sx={{ margin: "16px 0px" }}
+        />
+      </Grid>
+    </>
+  );
 };
 
 export default Comics;

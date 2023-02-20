@@ -7,7 +7,8 @@ import useTheme from "./theme";
 export const BodyGrid = styled(Grid)(({ theme }) => ({
   color: theme.palette.text.primary,
   background: theme.palette.primary.main,
-  height: "100vh",
+  minHeight: "100vh",
+  height: "100%",
 }));
 
 const queryClient = new QueryClient();
