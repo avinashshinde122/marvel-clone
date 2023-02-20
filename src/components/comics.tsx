@@ -26,24 +26,25 @@ const Comics = ({ searchText, selectedCharacters }: ComicsProps) => {
     return <div>Loading...</div>;
   }
   return (
-    <>
-      <Grid>
-        {searchText && <Typography>Search results</Typography>}
-        {selectedCharacters &&
-          selectedCharacters.map((char) => (
-            <Typography>{char.name}</Typography>
-          ))}
+    <Grid container justifyContent="center" alignItems="center" m={"auto"}>
+      <Grid item md={10}>
+        {searchText && <Typography variant="body2">Search results</Typography>}
+        {selectedCharacters.length > 0 && (
+          <Typography variant="subtitle1">
+            Explore- {selectedCharacters.map((char) => char.name).join(", ")}
+          </Typography>
+        )}
       </Grid>
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-        md={10}
-        m={"auto"}
-      >
+      <Grid item md={10} sx={{ display: "flex", flexWrap: "wrap" }}>
         {data?.data?.results.map((comic: IComics) => (
           <ComicCard comic={comic} key={comic.id} />
         ))}
+      </Grid>
+      <Grid
+        item
+        md={10}
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
         <Pagination
           count={totalPages}
           variant="outlined"
@@ -54,7 +55,7 @@ const Comics = ({ searchText, selectedCharacters }: ComicsProps) => {
           sx={{ margin: "16px 0px" }}
         />
       </Grid>
-    </>
+    </Grid>
   );
 };
 
