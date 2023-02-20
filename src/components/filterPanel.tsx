@@ -21,8 +21,8 @@ export const NextPrevButton = styled(IconButton)(({ theme }) => ({
 }));
 
 type FilterPanelProps = {
-  onSetCharactersFilter: React.Dispatch<React.SetStateAction<number[]>>;
-  selectedCharacters: number[];
+  onSetCharactersFilter: React.Dispatch<React.SetStateAction<ICharacters[]>>;
+  selectedCharacters: ICharacters[];
 };
 
 const FilterPanel = ({
@@ -57,14 +57,14 @@ const FilterPanel = ({
         {data?.data?.results.map((character: ICharacters) => {
           const thumbnailUrl = getThumbnailUrl(character.thumbnail);
           const isSelected = selectedCharacters.some(
-            (char) => char === character.id
+            (char) => char.id === character.id
           );
           return (
             <Button
               key={character.id}
               onClick={() =>
                 onSetCharactersFilter((prev) => [
-                  ...Array.from(new Set([...prev, character.id])),
+                  ...Array.from(new Set([...prev, character])),
                 ])
               }
             >

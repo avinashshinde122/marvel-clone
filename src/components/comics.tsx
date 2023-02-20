@@ -1,14 +1,15 @@
+import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { getComics } from "../api/comics";
-import { IComics } from "../types";
+import { ICharacters, IComics } from "../types";
 import ComicCard from "./comicCard";
 
 type ComicsProps = {
   searchText: string;
-  selectedCharacters: number[];
+  selectedCharacters: ICharacters[];
 };
 const Comics = ({ searchText, selectedCharacters }: ComicsProps) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,6 +27,13 @@ const Comics = ({ searchText, selectedCharacters }: ComicsProps) => {
   }
   return (
     <>
+      <Grid>
+        {searchText && <Typography>Search results</Typography>}
+        {selectedCharacters &&
+          selectedCharacters.map((char) => (
+            <Typography>{char.name}</Typography>
+          ))}
+      </Grid>
       <Grid
         container
         justifyContent="center"

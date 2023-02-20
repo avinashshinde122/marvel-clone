@@ -1,9 +1,10 @@
+import { ICharacters } from "../types";
 import { API_KEY, BASE_URL, COMICS, HASH, TS } from "./constants";
 
 export const getComics = async (
   page: number,
   searchText: string,
-  charactersFilter: number[]
+  charactersFilter: ICharacters[]
 ) => {
   let url = `${
     BASE_URL + COMICS
@@ -12,7 +13,7 @@ export const getComics = async (
     url += `&titleStartsWith=${searchText}`;
   }
   if (charactersFilter?.length > 0) {
-    url += `&characters=${charactersFilter.join(",")}`;
+    url += `&characters=${charactersFilter.map((char) => char.id).join(",")}`;
   }
   const result = await fetch(url);
   return await result.json();
