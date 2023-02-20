@@ -31,7 +31,7 @@ const Comics = ({ searchText }: ComicsProps) => {
         justifyContent="center"
         alignItems="center"
         md={10}
-        sx={{ margin: "auto" }}
+        m={"auto"}
       >
         {data?.data?.results.map((comic: IComics) => (
           <ComicCard comic={comic} key={comic.id} />

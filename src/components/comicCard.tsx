@@ -20,7 +20,7 @@ const ComicCard = ({ comic }: ComicCardType) => {
         component="img"
         height="194"
         image={thumbnailUrl}
-        alt="Paella dish"
+        alt={comic.title}
       />
       <CardContent>
         <Typography variant="body2" color="text.primary">

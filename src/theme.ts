@@ -40,7 +40,7 @@ const useTheme = (mode: string) => {
         : {
             primary: {
               main: "#423e3e",
-              dark: "",
+              dark: "#333030",
             },
             secondary: {
               light: "#469dcd",
